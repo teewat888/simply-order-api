@@ -1,7 +1,8 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+#reset prmiary key to 1 for each drop
+ActiveRecord::Base.connection.reset_pk_sequence!('roles')
+
+roles = ['admin', 'vendor', 'customer']
+roles.each { |role| Role.create(name: role)}
+
+admin = User.create(email: 'teeat@yahoo.com', password: '111111', role_id: 1)
+

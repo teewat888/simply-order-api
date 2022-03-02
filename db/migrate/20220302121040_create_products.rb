@@ -5,6 +5,7 @@ class CreateProducts < ActiveRecord::Migration[6.1]
       t.string :description
       t.string :brand
       t.string :unit
+      t.bigint :vendor_id
 
       t.timestamps
     end

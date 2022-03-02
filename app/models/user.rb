@@ -24,8 +24,13 @@
 #
 class User < ApplicationRecord
     has_secure_password 
+    
     belongs_to :role
+    has_many :products, foreign_key: "vendor_id"
+    has_many :order_templates
+    has_many :orders
     validates :email, uniqueness: true
+
 
     before_create :gen_auth_token
 

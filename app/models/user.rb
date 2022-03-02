@@ -28,14 +28,11 @@ class User < ApplicationRecord
     validates :email, uniqueness: true
 
     before_create :gen_auth_token
+
     def gen_auth_token(force = false)
         self.auth_token ||= SecureRandom.uuid
         # if force, change the auth_token-> logout
         self.auth_token = SecureRandom.uuid if force
     end
 
-    def jwt(exp = 1.days.from_now)
-        payload = { exp: exp.to_i, auth_token: self.auth_token }
-        JWT.encode payload, Rails.application.credentials.secret_key_base, 'HS256'
-    end
 end

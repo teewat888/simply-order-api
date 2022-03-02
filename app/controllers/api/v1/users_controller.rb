@@ -1,9 +1,12 @@
 class Api::V1::UsersController < Api::AppController
+    before_action :authorized, except: [:sign_up]
+    before_action :set_user, only: [:profile]
 
     def sign_up
         @user = User.create(user_params)
         if @user.valid?
-            render json: { success: true, jwt: @user.jwt }, status: :created
+            @token = encode_token(@user.auth_token)
+            render json: { success: true, jwt: @token }, status: :created
         else
             render json: {
                     success: false,

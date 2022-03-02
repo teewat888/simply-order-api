@@ -1,4 +1,4 @@
-class Api::V1::ErrorsController < Api::AppController
+class Api::V1::ErrorsController < ApplicationController
   def not_found
     render json: {
       status: 404,

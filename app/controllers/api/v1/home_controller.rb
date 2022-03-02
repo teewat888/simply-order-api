@@ -1,6 +1,5 @@
-class Api::V1::HomeController < Api::AppController
+class Api::V1::HomeController < ApplicationController
     def first_page
-        render json: { success: true, message: "Welcome to simply order API services" }
-        
+        render json: { success: true, message: "Welcome to simply order API services" }   
     end
 end

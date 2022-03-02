@@ -1,4 +1,4 @@
-class Api::V1::TestController < Api::AppController
+class Api::V1::TestController < ApplicationController
     before_action :authorized
 
     def test_page

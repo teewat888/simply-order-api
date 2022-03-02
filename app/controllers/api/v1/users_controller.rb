@@ -1,6 +1,5 @@
-class Api::V1::UsersController < Api::AppController
+class Api::V1::UsersController < ApplicationController
     before_action :authorized, except: [:sign_up]
-    before_action :set_user, only: [:profile]
 
     def sign_up
         @user = User.create(user_params)
@@ -18,14 +17,10 @@ class Api::V1::UsersController < Api::AppController
     end
 
     def profile
-        render json: { success: true, message: "This is your profile" }
+        render json: { success: true, message: "This is your profile", user: UserSerializer.new(current_user_api) }
     end 
 
     private
-
-    def set_user
-        @user = User.find(params[:id])
-    end
 
     def user_params 
         params.require(:user).permit(:email, :password, :first_name, :last_name, :company_name, :address_number, :address_street, :address_suburb, :address_state, :contact_number, :role_id)

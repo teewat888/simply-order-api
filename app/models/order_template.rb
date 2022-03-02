@@ -1,0 +1,2 @@
+class OrderTemplate < ApplicationRecord
+end

@@ -28,7 +28,10 @@ class User < ApplicationRecord
     belongs_to :role
     has_many :products, foreign_key: "vendor_id"
     has_many :order_templates
+    has_many :vendor_order_templates, class_name: "OrderTemplate", foreign_key: "vendor_id"
     has_many :orders
+    has_many :vendor_orders, class_name: "Order", foreign_key: "vendor_id"
+
     validates :email, uniqueness: true
 
 

@@ -5,7 +5,8 @@ class CreateOrders < ActiveRecord::Migration[6.1]
       t.string :delivery_date
       t.text :comment
       t.string :order_ref
-
+      t.bigint :vendor_id
+      t.bigint :user_id
       t.timestamps
     end
   end

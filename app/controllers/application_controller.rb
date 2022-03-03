@@ -28,9 +28,9 @@ class ApplicationController < ActionController::API
     def current_user_api
         if decoded_token
             payload = decoded_token.first
-            # if (payload.blank? || payload["auth_token"].blank?) 
-            #     raise TPAuthError.new("Bad Token format!")
-            # end
+            if (payload.blank? || payload["auth_token"].blank?) 
+                raise TPAuthError.new("Bad Token format!")
+            end
             @user = User.find_by_auth_token(payload["auth_token"])
         end
     end

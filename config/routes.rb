@@ -9,6 +9,7 @@ Rails.application.routes.draw do
         get 'user/profile', to: "users#profile"
         #remove test controller later
         post 'test', to: "test#test_page"
+        get 'products', to: 'products#index'
     end
   end
 

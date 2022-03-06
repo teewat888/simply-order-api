@@ -23,5 +23,6 @@
 #  index_users_on_auth_token  (auth_token) UNIQUE
 #
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :first_name, :last_name, :email, :auth_token
+  attributes :id, :first_name, :last_name, :email, :auth_token, :role
+  belongs_to :role, serializer: RoleSerializer
 end

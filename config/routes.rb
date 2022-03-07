@@ -7,9 +7,10 @@ Rails.application.routes.draw do
         post 'user/sign_in', to: "auth#sign_in"
         delete 'user/sign_out', to: "auth#sign_out"
         get 'user/profile', to: "users#profile"
-        #remove test controller later
-        post 'test', to: "test#test_page"
         get 'products', to: 'products#index'
+        get "product/:id", to: 'products#show'
+        patch "product/:id", to: "products#update"
+        delete "product/:id", to: "products#destroy"
     end
   end
 

@@ -3,10 +3,13 @@ class Api::V1::ProductsController < ApplicationController
     before_action :authorized, except: [:index, :show]
 
     def index
-        @products = Product.limit(params[:limit]).offset(params[:offset])
-        #render json: @products, each_serializer: ProductSerializer
-        render json: { total_results: number_of_records , products: ActiveModelSerializers::SerializableResource.new(@products, 
-    {each_serializer: ProductSerializer})}
+        if params[:user_id]
+            
+           @products = User.find(params[:user_id]).products.limit(params[:limit]).offset(params[:offset])
+         
+           render json: { total_results: @products.count , products: ActiveModelSerializers::SerializableResource.new(@products, 
+        {each_serializer: ProductSerializer})}
+        end
     end
 
     def create
@@ -38,15 +41,12 @@ class Api::V1::ProductsController < ApplicationController
     end
 
     private
-    def number_of_records
-        Product.all.count
-    end
-
+   
     def set_product
         @product = Product.find(params[:id])
     end
 
     def product_params
-        params.permit(:id,:name, :brand, :unit, :vendor_id)
+        params.permit(:id,:name, :brand, :unit, :user_id)
     end
 end

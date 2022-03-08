@@ -11,6 +11,9 @@ Rails.application.routes.draw do
         get "product/:id", to: 'products#show'
         patch "product/:id", to: "products#update"
         delete "product/:id", to: "products#destroy"
+        resources :users, only: [:show] do
+          resources :products, only: [:show, :index, :new, :create, :update, :edit]
+        end
     end
   end
 

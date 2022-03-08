@@ -53,7 +53,8 @@ class ApplicationController < ActionController::API
 
     private
     def secret_key
-        Rails.application.credentials.secret_key_base
+        #Rails.application.credentials.secret_key_base
+        'mysecret'
     end
 
     def token_expire_in

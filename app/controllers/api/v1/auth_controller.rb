@@ -27,8 +27,7 @@ class Api::V1::AuthController < ApplicationController
   def sign_out
     #force change auth_token
     current_user_api.update(auth_token: current_user_api.gen_auth_token(true))
-    # c_user.gen_auth_token(true)
-    # c_user.save
+    
 
     render json: { success: true, message: "You have signed out sucessfully!" }
 
@@ -36,7 +35,7 @@ class Api::V1::AuthController < ApplicationController
 
   private
   def user_login_params
-    # params { user: {email: 'Chandler Bing', password: 'hi' } }
+    
     params.require(:user).permit(:email, :password)
   end
 

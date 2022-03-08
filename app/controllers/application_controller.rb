@@ -1,5 +1,11 @@
 class ApplicationController < ActionController::API
     include Error::ErrorHandler
+        rescue_from JWT::DecodeError, with: :rescue_unauthorized
+        rescue_from JWT::ExpiredSignature, with: :rescue_unauthorized
+        rescue_from JWT::ImmatureSignature, with: :rescue_unauthorized
+        rescue_from JWT::InvalidIssuerError, with: :rescue_unauthorized
+        rescue_from JWT::InvalidIatError, with: :rescue_unauthorized
+        rescue_from JWT::VerificationError, with: :rescue_unauthorized
 
     def encode_token(pl)
         payload = { exp: token_expire_in.to_i, auth_token: pl }
@@ -45,6 +51,7 @@ class ApplicationController < ActionController::API
         end
     end
 
+    private
     def secret_key
         Rails.application.credentials.secret_key_base
     end
@@ -56,6 +63,10 @@ class ApplicationController < ActionController::API
 
     def hmac_type
         'HS256'
+    end
+
+    def rescue_unauthorized(err)
+        render json: {success: false, error: err}, status: :unauthorized
     end
 
 end

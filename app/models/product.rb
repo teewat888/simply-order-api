@@ -3,6 +3,7 @@
 # Table name: products
 #
 #  id         :bigint           not null, primary key
+#  available  :boolean          default(TRUE)
 #  brand      :string
 #  name       :string
 #  unit       :string
@@ -14,4 +15,8 @@ class Product < ApplicationRecord
     belongs_to :vendor, class_name: "User"
     has_many :order_details
     has_many :orders, through: :order_details
+
+    validates :name, presence: true
+    validates :unit, presence: true
+    
 end

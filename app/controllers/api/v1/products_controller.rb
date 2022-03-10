@@ -47,6 +47,6 @@ class Api::V1::ProductsController < ApplicationController
     end
 
     def product_params
-        params.permit(:id,:name, :brand, :unit,:available, :user_id)
+        params.require(:product).permit(:id,:name, :brand, :unit,:available, :vendor_id)
     end
 end

@@ -3,6 +3,7 @@
 # Table name: products
 #
 #  id         :bigint           not null, primary key
+#  available  :boolean          default(TRUE)
 #  brand      :string
 #  name       :string
 #  unit       :string

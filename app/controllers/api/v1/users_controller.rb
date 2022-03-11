@@ -1,5 +1,13 @@
 class Api::V1::UsersController < ApplicationController
-    before_action :authorized, except: [:sign_up]
+    before_action :authorized, except: [:sign_up, :index]
+
+    def index
+        if (params[:role_id])
+            users = Role.find(params[:role_id]).users
+            render json: { success: true, vendors: ActiveModelSerializers::SerializableResource.new(users, 
+        {each_serializer: UserSerializer})}
+        end
+    end
 
     def sign_up
         @user = User.create(user_params)

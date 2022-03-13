@@ -12,6 +12,6 @@
 #  vendor_id  :bigint
 #
 class ProductSerializer < ActiveModel::Serializer
-  attributes :id, :name, :brand, :unit, :available, :vendor
+  attributes :id, :name, :brand, :unit, :available, :vendor, :in_template
   belongs_to :vendor, serializer: VendorSerializer
 end

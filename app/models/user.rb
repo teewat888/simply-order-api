@@ -32,6 +32,7 @@ class User < ApplicationRecord
     has_many :orders
     has_many :vendor_orders, class_name: "Order", foreign_key: "vendor_id"
 
+    validates :email, presence: true
     validates :email, uniqueness: true
 
 
@@ -42,5 +43,6 @@ class User < ApplicationRecord
         # if force, change the auth_token-> logout
         self.auth_token = SecureRandom.uuid if force
     end
+
 
 end

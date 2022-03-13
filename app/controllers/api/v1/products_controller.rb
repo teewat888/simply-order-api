@@ -3,12 +3,14 @@ class Api::V1::ProductsController < ApplicationController
     before_action :authorized, except: [:index, :show]
 
     def index
-        if params[:user_id]
-            
+        if (params[:mode] === 'myproduct')
+            if params[:user_id]
            @products = User.find(params[:user_id]).products.limit(params[:limit]).offset(params[:offset])
-         
-           render json: { total_results: @products.count , products: ActiveModelSerializers::SerializableResource.new(@products, 
+           render json: { success: true, total_results: @products.count , products: ActiveModelSerializers::SerializableResource.new(@products, 
         {each_serializer: ProductSerializer})}
+            end
+        elsif (params[:mode] === 'template') #get product that available for template
+            render json: { success: true, vendor_id: params[:user_id], products: Product.available_products_for_template(params[:user_id])}
         end
     end
 

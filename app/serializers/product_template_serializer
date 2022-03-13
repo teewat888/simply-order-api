@@ -1,0 +1,5 @@
+class ProductTemplateSerializer < ActiveModel::Serializer
+    root :product
+    attributes :id, :name, :brand, :unit, :in_template
+  
+end

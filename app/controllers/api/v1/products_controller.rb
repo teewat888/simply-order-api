@@ -10,7 +10,7 @@ class Api::V1::ProductsController < ApplicationController
         {each_serializer: ProductSerializer})}
             end
         elsif (params[:mode] === 'template') #get product that available for template
-            render json: { success: true, vendor_id: params[:user_id], products: Product.available_products_for_template(params[:user_id])}
+            render json: { success: true, vendor_id: params[:user_id], products: Product.available_products_for_template(user: params[:user_id])}
         end
     end
 

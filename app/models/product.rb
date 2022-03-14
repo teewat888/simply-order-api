@@ -22,8 +22,8 @@ class Product < ApplicationRecord
     validates :name, presence: true
     validates :unit, presence: true
 
-    def self.available_products_for_template(user_id)
-        products = User.find(user_id).products.select('id','name','brand','unit').where("available = true")
+    def self.available_products_for_template(user:)
+        products = User.find(user).products.select('id','name','brand','unit').where("available = true")
     end
 
 

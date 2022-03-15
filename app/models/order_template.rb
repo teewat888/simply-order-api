@@ -14,11 +14,14 @@ class OrderTemplate < ApplicationRecord
     belongs_to :user
     belongs_to :vendor, class_name: "User"
 
+    #templates of vendor
     def self.order_template_list(user: ,vendor: )
         User.find(user).order_templates.select('id, name').where(vendor_id: vendor)
     end
-
+    #templates own by a user
     def self.own_order_template_list(user:)
         User.find(user).order_templates.select('id, name')
     end
+
+    
 end

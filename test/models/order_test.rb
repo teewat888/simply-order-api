@@ -6,6 +6,7 @@
 #  comment       :text
 #  delivery_date :string
 #  order_date    :date
+#  order_details :jsonb
 #  order_ref     :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null

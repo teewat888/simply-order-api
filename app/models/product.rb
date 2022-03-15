@@ -16,8 +16,7 @@ class Product < ApplicationRecord
    attribute :in_template, :boolean, default: true
 
     belongs_to :vendor, class_name: "User"
-    has_many :order_details
-    has_many :orders, through: :order_details
+    
 
     validates :name, presence: true
     validates :unit, presence: true

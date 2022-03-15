@@ -13,7 +13,7 @@ class Api::V1::UsersController < ApplicationController
         @user = User.create(user_params)
         if @user.valid?
             @token = encode_token(@user.auth_token)
-            render json: { success: true, jwt: @token }, status: :created
+            render json: { success: true, user: UserSerializer.new(@user), jwt: @token }, status: :created
         else
             render json: {
                     success: false,

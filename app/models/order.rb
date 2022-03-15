@@ -19,7 +19,7 @@ class Order < ApplicationRecord
     belongs_to :vendor, class_name: "User"
 
     #products that enable in template
-    def self.products_in_template(user:)
-        OrderTemplate.find(user).products.select { |p| p['in_template'] = true }
+    def self.products_in_template(template:)
+        OrderTemplate.find(template).products.select { |p| p['in_template'] = true }
     end
 end

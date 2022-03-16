@@ -1,5 +1,5 @@
 class Api::V1::OrderTemplatesController < ApplicationController
-    before_action :authorized, only: [:index, :create, :destroy]
+    before_action :authorized, only: [:index, :create, :destroy, :order_form]
 
     def index
         if (params[:user_id] && params[:vendor_id])
@@ -16,6 +16,14 @@ class Api::V1::OrderTemplatesController < ApplicationController
             render json: { success: true, message:"Order template created"}
         else
             render json: { success: false, message: "Error while creating a template."}
+        end
+    end
+
+    def order_form
+        if(params[:template_id])
+            render json: { success: true, products: Product.available_products_for_order_form(template_id: params[:template_id]) }
+        else
+            render json: { success: false, message: "Error while creating order with this template."}
         end
     end
 

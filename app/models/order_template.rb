@@ -16,11 +16,11 @@ class OrderTemplate < ApplicationRecord
 
     #templates of vendor
     def self.order_template_list(user: ,vendor: )
-        User.find(user).order_templates.select('id, name').where(vendor_id: vendor)
+        User.find(user).order_templates.select('id, name, vendor_id').where(vendor_id: vendor)
     end
     #templates own by a user
     def self.own_order_template_list(user:)
-        User.find(user).order_templates.select('id, name')
+        User.find(user).order_templates.select('id, name, vendor_id')
     end
 
     

@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-    before_action :authorized, except: [:sign_up, :index]
+    before_action :authorized, except: [:index]
 
     def index
         if (params[:role_id])
@@ -9,26 +9,20 @@ class Api::V1::UsersController < ApplicationController
         end
     end
 
-    def sign_up
-        @user = User.create(user_params)
-        if @user.valid?
-            @token = encode_token(@user.auth_token)
-            render json: { success: true, user: UserSerializer.new(@user), jwt: @token }, status: :created
-        else
-            render json: {
-                    success: false,
-                    errors: @user.errors.as_json
-                    },
-                    status: :unprocessable_entity
-        end
-
-    end
-
     def profile
         render json: { success: true, message: "This is your profile", user: UserSerializer.new(current_user_api) }
     end 
 
+    def vendor
+        if (params[:id])
+            render json: { success: true, vendor: User.find(params[:id])}
+        else
+            render json: {success: false, message: "Error get a vendor detail"}
+        end
+    end
+
     private
+
 
     def user_params 
         params.require(:user).permit(:email, :password, :first_name, :last_name, :company_name, :address_number, :address_street, :address_suburb, :address_state, :contact_number, :role_id)

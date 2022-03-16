@@ -3,14 +3,16 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       root to: 'home#first_page'
-        post 'user/sign_up', to: "users#sign_up"
+        post 'user/sign_up', to: "auth#sign_up"
         post 'user/sign_in', to: "auth#sign_in"
         delete 'user/sign_out', to: "auth#sign_out"
         get 'user/profile', to: "users#profile"
+        get 'user/vendor/:id', to: "users#vendor"
         get 'products', to: 'products#index'
         get "product/:id", to: 'products#show'
         patch "product/:id", to: "products#update"
         delete "product/:id", to: "products#destroy"
+        get 'user/order_form', to: "order_templates#order_form"
         get 'users', to: "users#index"
         resources :users, only: [:show] do
           resources :products, only: [:show, :index, :new, :create, :update, :edit]

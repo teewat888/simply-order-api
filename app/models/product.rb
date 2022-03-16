@@ -25,5 +25,11 @@ class Product < ApplicationRecord
         products = User.find(user).products.select('id','name','brand','unit').where("available = true")
     end
 
-
+    #check before create order form that product still available & also filter on that in the template
+    def self.available_products_for_order_form(template_id:)
+        products = OrderTemplate.find(template_id).products.select { |p| p['in_template'] == true }
+        products.select do |product|
+            result = Product.find(product['id']).available
+        end
+    end
 end

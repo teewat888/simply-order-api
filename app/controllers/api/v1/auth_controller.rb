@@ -8,10 +8,10 @@ class Api::V1::AuthController < ApplicationController
     if @user
     # encode token comes from AppController
       token = encode_token(@user.auth_token)
+      response.headers["jwt"] = token
       render json: {
               success: true,
               user: UserSerializer.new(@user),
-              jwt: token,
              },
              status: :accepted
     else
@@ -42,15 +42,11 @@ class Api::V1::AuthController < ApplicationController
   def sign_out
     #force change auth_token
     current_user_api.update(auth_token: current_user_api.gen_auth_token(true))
-    
-
     render json: { success: true, message: "You have signed out sucessfully!" }
-
   end
 
   private
-  def user_params
-    
+  def user_params 
     params.require(:user).permit(:email, :password, :first_name, :last_name, :company_name, :address_number, :address_street, :address_suburb, :address_state, :contact_number, :role_id)
   end
 

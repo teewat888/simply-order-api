@@ -46,7 +46,11 @@ class ApplicationController < ActionController::API
     end
 
     def authorized
-        unless logged_in?
+        if logged_in?
+            #renew jwt in case not expire time yet
+            token = encode_token(@user.auth_token) 
+            response.headers["jwt"] = encode_token(@user.auth_token) 
+        else
             render json: { success: false, message: 'Please log in' }, status: :unauthorized
         end
     end
@@ -59,7 +63,7 @@ class ApplicationController < ActionController::API
 
     def token_expire_in
         #1.days.from_now 
-        15.minutes.from_now
+        2.minutes.from_now
     end
 
     def hmac_type

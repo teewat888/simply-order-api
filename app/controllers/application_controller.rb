@@ -63,7 +63,7 @@ class ApplicationController < ActionController::API
 
     def token_expire_in
         #1.days.from_now 
-        2.minutes.from_now
+        15.minutes.from_now
     end
 
     def hmac_type

@@ -14,6 +14,10 @@
 class Product < ApplicationRecord
     #virtual attr to store the order template flag
    attribute :in_template, :boolean, default: true
+   #virtual attr for aqty of order form
+   attribute :qty, :string, default: '0' 
+   #virtual attr for note of each product (will inplement for future release)
+   attribute :note 
 
     belongs_to :vendor, class_name: "User"
     

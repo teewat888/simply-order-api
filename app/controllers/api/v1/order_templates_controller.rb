@@ -31,7 +31,8 @@ class Api::V1::OrderTemplatesController < ApplicationController
     private
 
     def order_templates_params
-        params.require(:order_template).permit(:user_id,:vendor_id,:name, products: [:id, :name,:brand,:unit,:in_template])
+        #  products: [:id, :name,:brand,:unit,:in_template, :qty] will identify what will include in jsonb - products
+        params.require(:order_template).permit(:user_id,:vendor_id,:name, products: [:id, :name,:brand,:unit,:in_template, :qty])
     end
 
 end

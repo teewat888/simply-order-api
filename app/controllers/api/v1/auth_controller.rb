@@ -9,9 +9,11 @@ class Api::V1::AuthController < ApplicationController
     # encode token comes from AppController
       token = encode_token(@user.auth_token)
       response.headers["jwt"] = token
+      #need to remove the below render jwt -> hkeep for testing purpose
       render json: {
               success: true,
               user: UserSerializer.new(@user),
+              jwt: token
              },
              status: :accepted
     else

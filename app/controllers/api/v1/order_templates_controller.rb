@@ -1,5 +1,5 @@
 class Api::V1::OrderTemplatesController < ApplicationController
-    before_action :authorized, only: [:index, :create, :destroy, :order_form]
+    before_action :authorized, only: [:index, :create, :destroy, :order_form ]
 
     def index
         if (params[:user_id] && params[:vendor_id])
@@ -19,11 +19,21 @@ class Api::V1::OrderTemplatesController < ApplicationController
         end
     end
 
+    #have to add authorized here once finish test
     def order_form
-        if(params[:template_id])
-            render json: { success: true, products: Product.available_products_for_order_form(template_id: params[:template_id]) }
+        if(params[:template_id] && params[:vendor_id] && params[:user_id])
+            #get products
+            products = Product.available_products_for_order_form(template_id: params[:template_id])
+            #create order
+            order = Order.new(user_id: params[:user_id], vendor_id: params[:vendor_id], order_details: products)
+            if order.save
+                render json: { success: true, order_id: order.id, order_date: "", delivery_date: "", comment: "", order_ref: "", user_id: params[:user_id], vendor_id: params[:vendor_id], order_details: order.order_details}
+            else
+                render json: { success: false, message: "Error while creating order."}
+            end
+            #render json: { success: true, products: Product.available_products_for_order_form(template_id: params[:template_id]) }
         else
-            render json: { success: false, message: "Error while creating order with this template."}
+            render json: { success: false, message: "Error while creating order with this template.(Incompleted/incorrect params"}
         end
     end
 

@@ -4,7 +4,7 @@
 #
 #  id            :bigint           not null, primary key
 #  comment       :text
-#  delivery_date :string
+#  delivery_date :date
 #  order_date    :date
 #  order_details :jsonb
 #  order_ref     :string

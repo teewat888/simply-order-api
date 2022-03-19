@@ -1,13 +1,12 @@
 class Api::V1::OrdersController < ApplicationController
 
-    def create
-        order = Order.new(order_params)
-        if order.save
-            render json: { success: true, message: 'Successfully created order' }
+   def index
+        if (params[:user_id])
+            render json: {success: true, orders: User.find(params[:user_id]).orders}
         else
-            render json: { success: false, message: 'Error creating an order.' }
+            render json: {success: false, message: "No order history."}
         end
-    end
+   end
 
     private
     def order_params

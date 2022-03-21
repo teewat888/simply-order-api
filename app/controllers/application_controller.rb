@@ -49,7 +49,8 @@ class ApplicationController < ActionController::API
         if logged_in?
             #renew jwt in case not expire time yet
             token = encode_token(@user.auth_token) 
-            response.headers["jwt"] = encode_token(@user.auth_token) 
+            p token
+            response.headers["jwt"] = token
         else
             render json: { success: false, message: 'Please log in' }, status: :unauthorized
         end
@@ -57,13 +58,13 @@ class ApplicationController < ActionController::API
 
     private
     def secret_key
-        #Rails.application.credentials.secret_key_base
-        'mysecret'
+        Rails.application.credentials.secret_key_base
+        #'mysecret'
     end
 
     def token_expire_in
         #1.days.from_now 
-        5.minutes.from_now
+        30.minutes.from_now
     end
 
     def hmac_type

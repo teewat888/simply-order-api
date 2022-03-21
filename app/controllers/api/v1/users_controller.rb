@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-    before_action :authorized, except: [:index]
+    before_action :authorized, except: [:index, :vendor]
 
     def index
         if (params[:role_id])

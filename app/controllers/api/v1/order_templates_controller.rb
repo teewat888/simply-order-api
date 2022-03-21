@@ -28,9 +28,11 @@ class Api::V1::OrderTemplatesController < ApplicationController
             products = Product.available_products_for_order_form(template_id: params[:template_id])
             #create order
             order = Order.new(user_id: params[:user_id], vendor_id: params[:vendor_id], order_details: products)
+            #init values
             order.order_ref = "#{template_name} #{order_time}"
+            order.order_date = Time.now
             if order.save
-                render json: { success: true, order_id: order.id, order_date: "", delivery_date: "", comment: "", order_ref: order.order_ref, user_id: params[:user_id], vendor_id: params[:vendor_id], order_details: order.order_details}
+                render json: { success: true, id: order.id, order_date: order.order_date, delivery_date: "", comment: "", order_ref: order.order_ref, user_id: params[:user_id], vendor_id: params[:vendor_id], order_details: order.order_details}
             else
                 render json: { success: false, message: "Error while creating order."}
             end

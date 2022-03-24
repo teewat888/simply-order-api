@@ -5,7 +5,7 @@ class Api::V1::OrdersController < ApplicationController
         if (params[:user_id]) 
             render json: {success: true, orders: User.find(params[:user_id]).orders.select('id, order_ref').order("updated_at DESC")}
         else
-            render json: {success: false, message: "No order history."}
+            render json: {success: false, message: "Error finding orders."}
         end
     end
 

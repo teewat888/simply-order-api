@@ -23,9 +23,18 @@ class Api::V1::OrderTemplatesController < ApplicationController
     def edit
         order_template = OrderTemplate.find(params[:id])
         if order_template
-            render json: {success: true, message: "Success fully load template.", template_details: order_template}
+            render json: {success: true, message: "Ready to edit.", template_details: order_template}
         else
             render json:{success: false, message: "Error while loading template!"}
+        end
+    end
+    #/api/v1/users/:user_id/order_templates/:id(.:format)
+    def update
+        order_template = OrderTemplate.find(params[:id])
+        if order_template.update(order_templates_params)
+            render json: {success: true, message: "Template edit successfully!"}
+        else
+            render json: {success: false, message: "Error while editing, please try again later."}
         end
     end
     #to get order items from template & create order 
@@ -40,7 +49,7 @@ class Api::V1::OrderTemplatesController < ApplicationController
             #create order
             order = Order.new(user_id: params[:user_id], vendor_id: params[:vendor_id], order_details: products)
             #init values
-            order.order_ref = "#{template_name} #{order_time}"
+            order.order_ref = "#{template_name}-#{order_ref_number} #{order_time}"
             order.order_date = Time.now
             if order.save
                 render json: { success: true, id: order.id, order_date: order.order_date, delivery_date: "", comment: "", order_ref: order.order_ref, user_id: params[:user_id], vendor_id: params[:vendor_id], order_details: order.order_details, message: "Order successfully created."}
@@ -73,6 +82,10 @@ class Api::V1::OrderTemplatesController < ApplicationController
     def order_time
         t = Time.now
         t.strftime("(%d/%m/%Y)")
+    end
+
+    def order_ref_number
+        "#{Array('A'..'Z').sample}#{rand 1000..9999}"
     end
 
 end

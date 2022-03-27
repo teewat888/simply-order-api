@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p><%= @greeting %></p>
+    <p><%= @intro_message %><%= @customer.company_name %></p>
+    <p>
+    Order details<br>
+    --------------------------
+    </p>
+    <p>Delivery date: <%= @order.delivery_date %></p>
+
+    <p>
+    --------------------------
+    </p>
+    <table>
+   
+    <% @order.email_details.each do |detail| %>
+     <tr>
+    <td><%= detail['name'] %></td><td><%= detail['qty'] %></td>
+     </tr>
+    <% end %>
+   
+    </table>
+     <p><%= @end_message %></p>
+     <p><%= @customer.first_name%></p>
+  </body>
+</html>

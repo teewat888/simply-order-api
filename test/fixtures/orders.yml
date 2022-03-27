@@ -5,6 +5,7 @@
 #  id            :bigint           not null, primary key
 #  comment       :text
 #  delivery_date :date
+#  email_to      :string
 #  order_date    :date
 #  order_details :jsonb
 #  order_ref     :string

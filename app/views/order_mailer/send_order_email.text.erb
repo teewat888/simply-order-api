@@ -1,0 +1,18 @@
+<%= @greeting %>
+<%= @intro_message %>
+
+Order from: 
+
+Order Details:
+--------------------------
+
+Delivery date: <%= @order.delivery_date %>
+
+  <% @order.email_details.each do |detail| %>
+    <%= detail['name'] %>          <%= detail['qty'] %>  <%= detail['unit'] %>
+    
+    <% end %>
+   
+
+
+<%= @end_message %>

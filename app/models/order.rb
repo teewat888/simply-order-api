@@ -5,6 +5,7 @@
 #  id            :bigint           not null, primary key
 #  comment       :text
 #  delivery_date :date
+#  email_to      :string
 #  order_date    :date
 #  order_details :jsonb
 #  order_ref     :string
@@ -14,6 +15,7 @@
 #  vendor_id     :bigint
 #
 class Order < ApplicationRecord
+    attribute :email_details, :jsonb, default: {} 
    
     belongs_to :user
     belongs_to :vendor, class_name: "User"

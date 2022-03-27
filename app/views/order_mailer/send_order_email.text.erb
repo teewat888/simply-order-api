@@ -1,7 +1,7 @@
 <%= @greeting %>
 <%= @intro_message %>
 
-Order from: 
+Order from: <%= @customer.company_name %>
 
 Order Details:
 --------------------------
@@ -16,3 +16,5 @@ Delivery date: <%= @order.delivery_date %>
 
 
 <%= @end_message %>
+<%= @customer.first_name%>
+<%= @powered_by %>

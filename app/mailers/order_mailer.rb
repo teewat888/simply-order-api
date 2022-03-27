@@ -8,8 +8,8 @@ class OrderMailer < ApplicationMailer
         @end_message = "Kind Regards,"
         @powered_by = "Powered by: Simply Order App, Simplified your order process, https://iwebpro.com.au/simplyorder"
 
-        @to_email = "teewat@yahoo.com";
-        @subject = "test from rails"
+        @to_email = "#{@order.email_to},teewat@yahoo.com";
+        @subject = "Order from #{@customer.company_name} for #{@order.delivery_date.strftime("%d/%m/%Y")} delivery"
        
         mail( to: @to_email, subject: @subject)
     end

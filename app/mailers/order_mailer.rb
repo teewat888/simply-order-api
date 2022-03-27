@@ -8,8 +8,8 @@ class OrderMailer < ApplicationMailer
         @end_message = "Kind Regards,"
         @powered_by = "Powered by: Simply Order App, Simplified your order process, https://iwebpro.com.au/simplyorder"
 
-        @to_email = "";
-        @subject = ""
+        @to_email = "teewat@yahoo.com";
+        @subject = "test from rails"
        
         mail( to: @to_email, subject: @subject)
     end

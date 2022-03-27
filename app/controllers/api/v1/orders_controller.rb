@@ -39,6 +39,7 @@ class Api::V1::OrdersController < ApplicationController
     def send_mail
         customer = User.find(@order.user_id) #find the customer company to make in the subject & body of email
         OrderMailer.with(order: @order, customer: customer).send_order_email.deliver_now
+        render json: {success: true, message: "sent email"}
     end
 
     def destroy

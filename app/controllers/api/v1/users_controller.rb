@@ -13,6 +13,15 @@ class Api::V1::UsersController < ApplicationController
         render json: { success: true, message: "This is your profile", user: UserSerializer.new(current_user_api) }
     end 
 
+    def update 
+        user = User.find(params[:id])
+        if user.update(user_params)
+            render json: {success: true, message: "Profile has been updated.", user: user}
+        else
+            render json: {success: false, message: "Error updating profile."}
+        end
+    end
+
     def vendor
         if (params[:id])
             render json: { success: true, vendor: User.find(params[:id])}

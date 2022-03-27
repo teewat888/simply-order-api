@@ -7,6 +7,7 @@ Rails.application.routes.draw do
         post 'user/sign_in', to: "auth#sign_in"
         delete 'user/sign_out', to: "auth#sign_out"
         get 'user/profile', to: "users#profile"
+        patch 'user/:id/update', to: "users#update"
         get 'user/vendor/:id', to: "users#vendor"
         get 'products', to: 'products#index'
         get "product/:id", to: 'products#show'
@@ -14,6 +15,7 @@ Rails.application.routes.draw do
         delete "product/:id", to: "products#destroy"
         get 'user/order_form', to: "order_templates#order_form"
         get 'users', to: "users#index"
+        get 'order/:id/send_mail', to: "orders#send_mail"
         resources :users, only: [:show] do
           resources :products, only: [:show, :index, :new, :create, :update, :edit]
         end

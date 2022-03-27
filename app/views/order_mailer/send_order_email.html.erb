@@ -10,7 +10,7 @@
     Order details<br>
     --------------------------
     </p>
-    <p>Delivery date: <%= @order.delivery_date %></p>
+    <p>Delivery date: <%= @order.delivery_date.strftime("%d/%m/%Y") %></p>
 
     <p>
     --------------------------
@@ -19,7 +19,7 @@
    
     <% @order.email_details.each do |detail| %>
      <tr>
-    <td><%= detail['name'] %></td><td><%= detail['qty'] %></td>
+    <td><%= detail['name'] %></td><td><%= detail['qty'] %> <%= detail['unit'] %></td>
      </tr>
     <% end %>
    

@@ -56,7 +56,7 @@ class Api::V1::OrdersController < ApplicationController
     end
 
     def order_params
-        params.require(:order).permit(:id, :comment, :order_date, :delivery_date, :user_id, :vendor_id, :order_ref, order_details: [:id, :name,:brand,:unit, :qty, :in_template])
+        params.require(:order).permit(:id, :comment, :order_date, :delivery_date, :user_id, :vendor_id, :order_ref,:email_to, order_details: [:id, :name,:brand,:unit, :qty, :in_template])
     end
 
     def qty_not_zero

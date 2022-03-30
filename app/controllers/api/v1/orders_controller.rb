@@ -1,4 +1,5 @@
 class Api::V1::OrdersController < ApplicationController
+    before_action :authorized
     before_action :set_order, only: [:show, :edit, :update, :destroy, :send_mail]
     before_action :qty_not_zero, only: [:send_mail]
   
@@ -35,6 +36,27 @@ class Api::V1::OrdersController < ApplicationController
             render json: {success: false, message: "Error updating order"}
         end
     end
+    #get orders to the vendor
+    def vendor_orders 
+        orders = Order.where("vendor_id = ?",params[:id])
+        if orders
+            orders_res = []
+            orders.each do |order| 
+                new_orders = {
+                    id: order.id,
+                    order_date: order.order_date,
+                    delivery_date: order.delivery_date,
+                    comment: order.comment,
+                    customer: order.user.company_name,
+                    order_details: filter_qty(order.order_details)
+                }
+                orders_res << new_orders
+            end
+            render json: {success: true, orders: orders_res, message: "successfully load orders"}
+        else
+            render json: {success: false, message: "Error while loading orders"}
+        end
+    end
 
     def send_mail
         customer = User.find(@order.user_id) #find the customer company to make in the subject & body of email
@@ -60,7 +82,13 @@ class Api::V1::OrdersController < ApplicationController
     end
 
     def qty_not_zero
-        @order.email_details = @order.order_details.select {|detail| detail['qty'] != "0"}
+        @order.email_details = @order.order_details.select do |detail| 
+            detail['qty'] != "0" && detail['qty'] != ""
+        end
+    end
+
+    def filter_qty(order)
+        order.select {|detail| detail['qty'] != "0"}
     end
 
 end

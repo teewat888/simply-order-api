@@ -37,7 +37,7 @@ class User < ApplicationRecord
     validates :company_name, presence: true
     validates :first_name, presence: true
     validates :last_name, presence: true
-    validates :password_digest, presence: true
+    validates :password, presence: true
 
 
 

@@ -15,10 +15,13 @@
 #  vendor_id     :bigint
 #
 class Order < ApplicationRecord
+    #to store only order qty emails
     attribute :email_details, :jsonb, default: {} 
    
     belongs_to :user
     belongs_to :vendor, class_name: "User"
+
+    validates :delivery_date, presence: :true
 
     #products that enable in template
     def self.products_in_template(template:)

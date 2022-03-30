@@ -16,6 +16,8 @@ Rails.application.routes.draw do
         get 'user/order_form', to: "order_templates#order_form"
         get 'users', to: "users#index"
         get 'order/:id/send_mail', to: "orders#send_mail"
+        get 'vendor/:id/orders', to: "orders#vendor_orders"
+        post 'user/:id/change_password', to: "users#change_password"
         resources :users, only: [:show] do
           resources :products, only: [:show, :index, :new, :create, :update, :edit]
         end

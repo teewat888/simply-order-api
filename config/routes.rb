@@ -18,6 +18,8 @@ Rails.application.routes.draw do
         get 'order/:id/send_mail', to: "orders#send_mail"
         get 'vendor/:id/orders', to: "orders#vendor_orders"
         post 'user/:id/change_password', to: "users#change_password"
+        post 'password/forgot', to: "passwords#forgot"
+        post 'password/reset', to: "passwords#reset"
         resources :users, only: [:show] do
           resources :products, only: [:show, :index, :new, :create, :update, :edit]
         end

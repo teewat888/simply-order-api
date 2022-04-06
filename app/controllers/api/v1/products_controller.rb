@@ -19,7 +19,7 @@ class Api::V1::ProductsController < ApplicationController
         if product.save
             render json: { success: true, product: ProductSerializer.new(product)}
         else
-            render json: { success: false, message: "Error when creating a product" }
+            render json: { success: false, message: error_text(product.errors), errors: product.errors.as_json }
         end
         
     end
@@ -32,7 +32,7 @@ class Api::V1::ProductsController < ApplicationController
         if @product.update(product_params)
             render json: { success: true, product: ProductSerializer.new(@product)}
         else
-            render json: { success: false, message: "Error when updating a product" }
+            render json: { success: false, message: error_text(@product.errors), errors: @product.errors.as_json}
         end
 
     end

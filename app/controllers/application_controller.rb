@@ -56,6 +56,14 @@ class ApplicationController < ActionController::API
         end
     end
 
+    def error_text(errors)
+        text = ""
+        errors.full_messages.each do |msg|
+        text += "<p>*#{msg}</p>"
+        end
+        text
+    end
+
     private
     def secret_key
         Rails.application.credentials.secret_key_base

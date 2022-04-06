@@ -35,7 +35,7 @@ class Api::V1::AuthController < ApplicationController
         else
             render json: {
                     success: false,
-                    message: easy_error(@user.errors),
+                    message: error_text(@user.errors),
                     errors: @user.errors.as_json
                     },
                     status: :unprocessable_entity
@@ -54,13 +54,6 @@ class Api::V1::AuthController < ApplicationController
     params.require(:user).permit(:email, :password, :first_name, :last_name, :company_name, :address_number, :address_street, :address_suburb, :address_state, :contact_number, :role_id)
   end
 
-  def easy_error(errors)
-    text = ""
-    errors.full_messages.each do |msg|
-      #msg.gsub("Password digest", "Password")
-      text += "<p>*#{msg}</p>"
-    end
-    text
-  end
+ 
 
 end

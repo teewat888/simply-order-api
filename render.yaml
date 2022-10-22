@@ -29,3 +29,4 @@ services:
 databases: # Render PostgreSQL database
   - name: postgresql-convex-03703
     ipAllowList: [] # only allow internal connections
+    plan: free

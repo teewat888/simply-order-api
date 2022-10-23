@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.3'
+ruby '2.7.6'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.6'
@@ -26,6 +26,8 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'rack-cors'
 
 
+
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -37,6 +39,10 @@ group :development do
   gem 'spring'
   gem 'annotate'
   gem 'bullet', '~> 6.1.0'
+   gem 'capistrano', '~> 3.17.1'
+  gem 'capistrano-passenger', '~> 0.2.0'
+  gem 'capistrano-rails', '~> 1.2'
+  gem 'capistrano-rbenv', '~> 2.1'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -45,3 +51,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "active_model_serializers", "~> 0.10.13"
 
 gem "faker", "~> 2.19"
+
+gem "ed25519"
+
+
+gem "bcrypt_pbkdf"

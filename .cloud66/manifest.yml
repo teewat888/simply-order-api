@@ -1,0 +1,4 @@
+rails:
+  configuration:
+    ruby_version: 2.7.6
+    asset_pipeline_precompile: false
